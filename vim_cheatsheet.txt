@@ -1,10 +1,13 @@
 daw : delete the word under the cursor    
 caw : delete the word under the cursor and put you in insert mode
 *   : search for word under cursor
+<space> : switch off search highlight
 =   : format selected code
 cit : inside tags <>
 dit :
 yit :
 similarly ci", ci{ and so forth
 5gg : instead of 5G
-<, >: indent, unindent the line
+<, > : indent, unindent the line
+/the\> : > as word boundary in searching, \> to escape
+then
