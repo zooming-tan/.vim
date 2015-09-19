@@ -182,6 +182,9 @@ set showmatch
 "" [VERY USEFUL] to facilitate pasting from an external application
 set pastetoggle=<F2>
 
+"" set the color of the line numbers
+highlight LineNr ctermfg=grey
+
 "*****************************************************************************
 "" Functions
 "*****************************************************************************
