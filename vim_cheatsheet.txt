@@ -13,3 +13,5 @@ similarly ci", ci{ and so forth
 then
 <C-I>  : jump forward (Inwards)
 <C-O>  : jump backward (Old)
+:PluginInstall : Install plugins through Vundle
+:PluginInstall! : Updates all plugins
