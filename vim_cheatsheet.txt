@@ -11,3 +11,5 @@ similarly ci", ci{ and so forth
 <, > : indent, unindent the line
 /the\> : > as word boundary in searching, \> to escape
 then
+<C-I>  : jump forward (Inwards)
+<C-O>  : jump backward (Old)
