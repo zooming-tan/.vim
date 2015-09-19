@@ -216,12 +216,11 @@ nnoremap <Down> <nop>
 nnoremap <Left> <nop>
 nnoremap <Right> <nop>
 
-"nnoremap h <nop>
-"nnoremap j <nop>
-"nnoremap k <nop>
-nnoremap l <nop>
+"nnoremap h <nop> " map to cheatsheet/help file
+nnoremap j jzz " always maintain the cursor at the center of the screen
+nnoremap k kzz
+nnoremap l <nop> " FREE
 
-"nnoremap j <nop>
 "" Disable highlight when <leader><cr> is pressed
 "map <silent> <leader><cr> :noh<cr>
 map <silent> <leader> :noh<cr>
