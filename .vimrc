@@ -20,10 +20,10 @@ Plugin 'VundleVim/Vundle.vim'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 "" disable rope, use YCM instead for auto-completion
-Bundle 'klen/python-mode' 
+Bundle 'klen/python-mode'
 
 "" need to compile YCM components (refer to the documentation)
-Bundle 'Valloric/YouCompleteMe' 
+Bundle 'Valloric/YouCompleteMe'
 
 Bundle 'ervandew/supertab'
 Bundle 'SirVer/ultisnips'
@@ -49,12 +49,12 @@ set laststatus=2
 "" [M            Jump on previous class or method (normal, visual, operator modes)
 "" ]M            Jump on next class or method (normal, visual, operator modes)
 
-"" Rope: 
+"" Rope:
 "" <Ctrl-Space>  Rope autocomplete
 "" <Ctrl-c>g     Rope goto definition
 "" <Ctrl-c>d     Rope show documentation
 "" <Ctrl-c>f     Rope find occurrences
-let g:pymode_rope = 0 
+let g:pymode_rope = 0
 let g:pymode_rope_complete_on_dot = 0
 
 "" Documentation:
@@ -115,7 +115,7 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-"***************************************************************************** 
+"*****************************************************************************
 "" Basic Setup
 "*****************************************************************************"
 
@@ -205,7 +205,7 @@ filetype plugin on
 filetype indent on
 
 "" Automatically remove trailing whitespaces
-autocmd FileType python,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType vim,text,python,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 "*****************************************************************************
 "" Mappings

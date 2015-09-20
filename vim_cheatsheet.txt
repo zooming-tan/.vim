@@ -1,4 +1,4 @@
-daw : delete the word under the cursor    
+daw : delete the word under the cursor
 caw : delete the word under the cursor and put you in insert mode
 *   : search for word under cursor
 <space> : switch off search highlight
@@ -15,3 +15,5 @@ then
 <C-O>  : jump backward (Old)
 :PluginInstall : Install plugins through Vundle
 :PluginInstall! : Updates all plugins
+:set filetype?  : show the filetype recognized by vim, if any
+
