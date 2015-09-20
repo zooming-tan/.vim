@@ -17,3 +17,5 @@ then
 :PluginInstall! : Updates all plugins
 :set filetype?  : show the filetype recognized by vim, if any
 
+git commit --amend : amend last commit
+git log -n 3: view the commit history
