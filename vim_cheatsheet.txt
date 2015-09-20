@@ -3,10 +3,11 @@ caw : delete the word under the cursor and put you in insert mode
 *   : search for word under cursor
 <space> : switch off search highlight
 =   : format selected code
-cit : inside tags <>
-dit :
-yit :
+ea  : append at the end of a word
+
+cit, dit, yit, vit : inside tags <>
 similarly ci", ci{ and so forth
+
 5gg : instead of 5G
 <, > : indent, unindent the line
 /the\> : > as word boundary in searching, \> to escape
@@ -19,3 +20,5 @@ then
 
 git commit --amend : amend last commit
 git log -n 3: view the commit history
+git reset   : simply unstaging everything
+git reset --hard: Clears your index(staging area), reverts all changes in your working directory to the last commit.
