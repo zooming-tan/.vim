@@ -219,10 +219,15 @@ nnoremap <Down> <nop>
 nnoremap <Left> <nop>
 nnoremap <Right> <nop>
 
-"nnoremap h <nop> " map to cheatsheet/help file
-nnoremap j jzz " always maintain the cursor at the center of the screen
+"" Toggle the cheatsheet window
+nnoremap h :execute "vsplit" "$HOME/.vim/vim_cheatsheet.txt"<cr>
+
+"" Always maintain the cursor at the center of the screen
+nnoremap j jzz
 nnoremap k kzz
-nnoremap l <nop> " FREE
+
+"" List search occurences
+nnoremap l :g//p<cr>
 
 "" Disable highlight when <leader><cr> is pressed
 "map <silent> <leader><cr> :noh<cr>
@@ -243,9 +248,6 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Shift-b to move cursor to the beginning of line
 nnoremap B ^
-
-" Toggle the cheatsheet window
-nnoremap h :execute "vsplit" "$HOME/.vim/vim_cheatsheet.txt"<cr>
 
 " Bracket matching
 inoremap ( ()<Esc>i
