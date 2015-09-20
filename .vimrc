@@ -185,6 +185,13 @@ set pastetoggle=<F2>
 "" set the color of the line numbers
 highlight LineNr ctermfg=grey
 
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
 "*****************************************************************************
 "" Functions
 "*****************************************************************************
