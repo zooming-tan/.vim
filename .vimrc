@@ -25,9 +25,20 @@ Bundle 'klen/python-mode'
 "" need to compile YCM components (refer to the documentation)
 Bundle 'Valloric/YouCompleteMe'
 
+"" code snipplets
 Bundle 'ervandew/supertab'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
+
+"" Ctrl-P fuzzy finder
+Bundle 'kien/ctrlp.vim'
+Bundle 'FelikZ/ctrlp-py-matcher'
+
+"" ag (alternative of grep)
+Bundle 'rking/ag.vim'
+
+"" auto-detect project root directory
+Bundle 'airblade/vim-rooter'
 
 "" All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -114,6 +125,40 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+"*****************************************************************************"
+"" Ctrl-P
+"*****************************************************************************"
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+let g:ctrlp_working_path_mode = 'ra'
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux"
+
+"" Speed up
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
+"*****************************************************************************
+"" ag (alternative for grep)
+"*****************************************************************************"
+
+if executable('ag')
+  "" override to use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 "*****************************************************************************
 "" Basic Setup
@@ -221,10 +266,10 @@ inoremap <esc> <nop>
 inoremap jk <esc>
 
 "" Disable arrow keys
-nnoremap <Up> <nop>
-nnoremap <Down> <nop>
-nnoremap <Left> <nop>
-nnoremap <Right> <nop>
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
 
 "" Toggle the cheatsheet window
 nnoremap h :execute "vsplit" "$HOME/.vim/vim_cheatsheet.txt"<cr>
@@ -263,3 +308,9 @@ inoremap [ []<Esc>i
 inoremap < <><Esc>i
 inoremap ' ''<Esc>i
 inoremap " ""<Esc>i
+
+"" map // to grep (Ag) -> vs. /
+nnoremap // :Ag!<Space>
+
+"" use ; instead of : in command
+nnoremap ; :

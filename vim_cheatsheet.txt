@@ -1,9 +1,24 @@
+TODO
+<<<< convert to database? auto sort(rank) based on feedback? >>>>
+<<<< map using <Leader> key: e.g. <Leader>sifc sif >>>>>>
+<<<< <Leader>nl - insert a new line >>>>>
+<<<< auto-(un)comment hotkey -> plugin >>>>
+<<<< "" after done filling, move cursor to the right, outside the quotes >>>>
+<<<< map ; to : >>>>
+<<<< fugitive >>>>
+<<<< add ctrl-p shortcuts >>>>
+
+<C-c> : cancel partial command
 daw : delete the word under the cursor
 caw : delete the word under the cursor and put you in insert mode
 *   : search for word under cursor
 <space> : switch off search highlight
 =   : format selected code
 ea  : append at the end of a word
+F2  : paste mode to preserve source formatting
+3S  : cut 3 lines (faster than visual selection) and enter Insert mode
+:ls : list buffers
+:b 4: switch to buffer no. 5
 
 cit, dit, yit, vit : inside tags <>
 similarly ci", ci{ and so forth
@@ -11,12 +26,21 @@ similarly ci", ci{ and so forth
 5gg : instead of 5G
 <, > : indent, unindent the line
 /the\> : > as word boundary in searching, \> to escape
-then
+//     : grep word under cursor
+/XXX then l:
 <C-I>  : jump forward (Inwards)
 <C-O>  : jump backward (Old)
 :PluginInstall : Install plugins through Vundle
 :PluginInstall! : Updates all plugins
 :set filetype?  : show the filetype recognized by vim, if any
+
+** ag (grep) **
+//XXXX : search for the string in the project folder
+//XXXX folder/ : search recursively within the specified directory
+e  : open file and close the quickfix window
+go : preview file (open but maintain focus on ag.vim results) -- why don't we generate the preview with each cursor movement?
+v  : open in a new vertical split
+q  : quit the quickfix window
 
 git commit --amend : amend last commit
 git log -n 3: view the commit history
