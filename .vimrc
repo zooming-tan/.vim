@@ -1,6 +1,6 @@
-"*****************************************************************************
+"***************************************************************************
 "" Vundle
-"*****************************************************************************"
+"***************************************************************************"
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -30,11 +30,11 @@ Bundle 'ervandew/supertab'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 
-"" Ctrl-P fuzzy finder
+"" Ctrl-p fuzzy file finder
 Bundle 'kien/ctrlp.vim'
 Bundle 'FelikZ/ctrlp-py-matcher'
 
-"" ag (alternative of grep)
+"" ag (an alternative of grep)
 Bundle 'rking/ag.vim'
 
 "" auto-detect project root directory
@@ -44,21 +44,23 @@ Bundle 'airblade/vim-rooter'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+"***************************************************************************
 "" Powerline
+"***************************************************************************
 let g:Powerline_symbols = "fancy"
 set laststatus=2
 
-"*****************************************************************************
-"" python-mode (without rope -> substituted by YouCompleteMe)
-"*****************************************************************************
+"***************************************************************************
+"" Python-mode
+"***************************************************************************
 "" Keys:
-"" K             Show python docs
-"" <Leader>r     Run python script
-"" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-"" [[            Jump on previous class or function (normal, visual, operator modes)
-"" ]]            Jump on next class or function (normal, visual, operator modes)
-"" [M            Jump on previous class or method (normal, visual, operator modes)
-"" ]M            Jump on next class or method (normal, visual, operator modes)
+"" K           Show python docs
+"" <Leader>r   Run python script
+"" <Leader>b   Set, unset breakpoint (g:pymode_breakpoint enabled)
+"" [[          Jump on previous class or function (normal, visual, operator modes)
+"" ]]          Jump on next class or function (normal, visual, operator modes)
+"" [M          Jump on previous class or method (normal, visual, operator modes)
+"" ]M          Jump on next class or method (normal, visual, operator modes)
 
 "" Rope:
 "" <Ctrl-Space>  Rope autocomplete
@@ -89,7 +91,7 @@ let g:pymode_virtualenv = 1
 let g:pymode_breakpoint = 1
 let g:pymode_breakpoint_bind = '<leader>b'
 
-"" syntax highlighting:
+"" Syntax highlighting:
 let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
@@ -101,10 +103,9 @@ let g:pymode_folding = 0
 "" Autoremove unused whitespaces
 let g:pymode_utils_whitespaces = 1
 
-"*****************************************************************************"
-"" YouCompleteMe
-"*****************************************************************************"
-
+"***************************************************************************"
+"" You Complete Me
+"***************************************************************************"
 "" enables auto closing of the preview window when the user accepts the
 "" offered completion string
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -117,38 +118,32 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-"*****************************************************************************"
+"***************************************************************************"
 "" UltiSnips
-"*****************************************************************************"
-
+"***************************************************************************"
 "" better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-"*****************************************************************************"
+"***************************************************************************"
 "" Ctrl-P
-"*****************************************************************************"
-
-let g:ctrlp_map = '<c-p>'
+"***************************************************************************"
 let g:ctrlp_cmd = 'CtrlP'
-
 let g:ctrlp_working_path_mode = 'ra'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-
 let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux"
 
-"" Speed up
+"" speed up
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
-"*****************************************************************************
+"***************************************************************************
 "" ag (alternative for grep)
-"*****************************************************************************"
-
+"***************************************************************************"
 if executable('ag')
   "" override to use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
@@ -160,10 +155,9 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-"*****************************************************************************
+"***************************************************************************
 "" Basic Setup
-"*****************************************************************************"
-
+"***************************************************************************"
 "" Encoding
 "set encoding=utf-8
 "set fileencoding=utf-8
@@ -189,8 +183,8 @@ let mapleader=' '
 set hidden
 
 "" Searching
-set hlsearch
 "set incsearch
+set hlsearch
 set ignorecase
 set smartcase
 
@@ -211,9 +205,9 @@ set fileformats=unix,dos,mac
 set showcmd
 set shell=/bin/sh
 
-"*****************************************************************************
+"***************************************************************************
 "" Visual Settings
-"*****************************************************************************
+"***************************************************************************
 syntax on
 set ruler
 set number
@@ -237,13 +231,13 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-"*****************************************************************************
+"***************************************************************************
 "" Functions
-"*****************************************************************************
+"***************************************************************************
 
-"*****************************************************************************
+"***************************************************************************
 "" Autocmd Rules
-"*****************************************************************************
+"***************************************************************************
 "" Enable filetypes
 filetype on
 filetype plugin on
@@ -252,14 +246,18 @@ filetype indent on
 "" Automatically remove trailing whitespaces
 autocmd FileType vim,text,python,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
-"*****************************************************************************
+"***************************************************************************
 "" Mappings
-"*****************************************************************************
+"***************************************************************************
 "" Easier window navigation
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
+
+"" Always center the cursor after Pg-Down or Pg-Up
+nnoremap <C-f> <C-f>zz
+nnoremap <C-b> <C-b>zz
 
 "" Exit from insert mode
 inoremap <esc> <nop>
@@ -311,6 +309,3 @@ inoremap " ""<Esc>i
 
 "" map // to grep (Ag) -> vs. /
 nnoremap // :Ag!<Space>
-
-"" use ; instead of : in command
-nnoremap ; :
