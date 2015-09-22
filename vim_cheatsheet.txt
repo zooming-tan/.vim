@@ -4,27 +4,36 @@ TODO
 <<<< <Leader>nl - insert a new line >>>>>
 <<<< auto-(un)comment hotkey -> plugin >>>>
 <<<< "" after done filling, move cursor to the right, outside the quotes >>>>
-<<<< map ; to : >>>>
+<<<< map ; to : >>>> -- any alternative, since ; is used by fX
 <<<< fugitive >>>>
-<<<< add ctrl-p shortcuts >>>>
+<<<< integrate ctrl-p with ag/ack, vim / -> omnisearch interface? with unite.vim as reference? >>>  -- inc. search (refining)
+<<<< vim wiki plugin >>>>
+<<<< :h expand -> symbols >>>>
+<<<<< vim list >>>>>
+<<<<< setqflist() , cexpr>>>>>
+<<<<< fugitive-git is crap >>>>>
 
 <C-c> : cancel partial command
-daw : delete the word under the cursor
-caw : delete the word under the cursor and put you in insert mode
-*   : search for word under cursor
+daw   : delete the word under the cursor
+caw   : delete the word under the cursor and put you in insert mode
+*     : search for word under cursor
 <space> : switch off search highlight
-=   : format selected code
-ea  : append at the end of a word
-F2  : paste mode to preserve source formatting
-3S  : cut 3 lines (faster than visual selection) and enter Insert mode
-:ls : list buffers
-:b 4: switch to buffer no. 5
+=     : format selected code
+ea    : append at the end of a word
+F2    : paste mode to preserve source formatting
+3S    : cut 3 lines (faster than visual selection) and enter Insert mode
+:ls   : list buffers
+:b 5  : switch to buffer no. 5
+:h :r! , :h :vnew, :h :bar(| separator) e.g. :tabnew | r !echo XXXX
+:echo &XXX: display the value of Vim variable
+
+tip: do something, then visual-select block and press . to repeat the command on each line
 
 cit, dit, yit, vit : inside tags <>
 similarly ci", ci{ and so forth
 
-5gg : instead of 5G
-<, > : indent, unindent the line
+5gg    :  instead of 5G
+<, >   : indent, unindent the line
 /the\> : > as word boundary in searching, \> to escape
 //     : grep word under cursor
 /XXX then l:
@@ -34,15 +43,39 @@ similarly ci", ci{ and so forth
 :PluginInstall! : Updates all plugins
 :set filetype?  : show the filetype recognized by vim, if any
 
-** ag (grep) **
+<<< ctrl-p >>> /* integrate with ag/ack, vim / -> omnisearch interface? */
+<C-p>  : start
+<C-j>, <C-k> : navigate
+<C-v>  : open the file in a new split
+
+<<< ack >>>
 //XXXX : search for the string in the project folder
 //XXXX folder/ : search recursively within the specified directory
-e  : open file and close the quickfix window
-go : preview file (open but maintain focus on ag.vim results) -- why don't we generate the preview with each cursor movement?
+o, O  : open file and close the quickfix window(use O)
+go : preview file (open but maintain focus on ack.vim results) -- why don't we generate the preview with each cursor movement?
 v  : open in a new vertical split
 q  : quit the quickfix window
 
+<<< git >>>
 git commit --amend : amend last commit
 git log -n 3: view the commit history
 git reset   : simply unstaging everything
 git reset --hard: Clears your index(staging area), reverts all changes in your working directory to the last commit.
+
+
+" fugitive git bindings
+nnoremap <space>ga :Git add %:p<CR><CR>
+nnoremap <space>gs :Gstatus<CR>
+nnoremap <space>gc :Gcommit -v -q<CR>
+nnoremap <space>gt :Gcommit -v -q %:p<CR>
+nnoremap <space>gd :Gdiff<CR>
+nnoremap <space>ge :Gedit<CR>
+nnoremap <space>gr :Gread<CR>
+nnoremap <space>gw :Gwrite<CR><CR>
+nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <space>gp :Ggrep<Space>
+nnoremap <space>gm :Gmove<Space>
+nnoremap <space>gb :Git branch<Space>
+nnoremap <space>go :Git checkout<Space>
+nnoremap <space>gps :Dispatch! git push<CR>
+nnoremap <space>gpl :Dispatch! git pull<CR>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"

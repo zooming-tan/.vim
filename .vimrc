@@ -1,5 +1,4 @@
-"***************************************************************************
-"" Vundle
+"*************************************************************************** "" Vundle
 "***************************************************************************"
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -17,28 +16,43 @@ Plugin 'VundleVim/Vundle.vim'
 "" fyi: https://github.com/pdf/ubuntu-mono-powerline-ttf
 "" fyi: http://vim.wikia.com/wiki/256_colors_in_vim
 "" fyi: Konsole > Edit Current Profile > Environment > xterm-256color
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 "" disable rope, use YCM instead for auto-completion
-Bundle 'klen/python-mode'
+Plugin 'klen/python-mode'
 
 "" need to compile YCM components (refer to the documentation)
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 "" code snipplets
-Bundle 'ervandew/supertab'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
+Plugin 'ervandew/supertab'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 "" Ctrl-p fuzzy file finder
-Bundle 'kien/ctrlp.vim'
-Bundle 'FelikZ/ctrlp-py-matcher'
+Plugin 'kien/ctrlp.vim'
+Plugin 'FelikZ/ctrlp-py-matcher'
 
-"" ag (an alternative of grep)
-Bundle 'rking/ag.vim'
+"" ack (an alternative of grep)
+Plugin 'mileszs/ack.vim'
 
 "" auto-detect project root directory
-Bundle 'airblade/vim-rooter'
+Plugin 'airblade/vim-rooter'
+
+"" colorscheme
+Plugin 'crusoexia/vim-monokai'
+
+"" source project-specific vimrc, name: .local.vimrc
+Plugin 'thinca/vim-localrc'
+
+"" git integration
+Plugin 'tpope/vim-fugitive'
+
+"" bookmarks and annotations (for code review)
+Plugin 'MattesGroeger/vim-bookmarks'
+
+"" personal diary
+Plugin 'vimwiki/vimwiki'
 
 "" All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -134,26 +148,52 @@ let g:ctrlp_working_path_mode = 'ra'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux"
+
+"" file listing
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files'],
+    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ },
+  \ 'fallback': 'ag %s -l --nocolor -g ""'
+  \ }
 
 "" speed up
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 "***************************************************************************
-"" ag (alternative for grep)
+"" ack (alternative for grep)
 "***************************************************************************"
 if executable('ag')
-  "" override to use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  set grepprg=ag\ --nogroup\ --nocolor " override to use ag over grep
+  let g:ackprg = 'ag'
 endif
+
+"***************************************************************************
+"" fugitive
+"***************************************************************************
+" operate on individual buffer
+
+"" git log
+noremap <Leader>gl :silent! Glog --oneline --all --decorate --graph<CR>:bot copen<CR>
+
+" git add or stage the file to the index
+noremap <Leader>ga :Gwrite<CR>
+
+" revert the state of the file to the last commit
+noremap <Leader>gr :Gread<CR>
+
+"" git status
+noremap <Leader>gs :Gstatus<CR>
+
+noremap <Leader>gc :Gcommit<CR>
+noremap <Leader>gps :Gpush<CR>
+noremap <Leader>gpl :Gpull --rebase<CR>
+noremap <Leader>gb :Gblame<CR>
+noremap <Leader>gd :Gvdiff<CR>
+
+"" and many more..
 
 "***************************************************************************
 "" Basic Setup
@@ -212,6 +252,9 @@ syntax on
 set ruler
 set number
 
+"" colorscheme
+colorscheme monokai
+
 "" visual autocomplete for command menu
 set wildmenu
 
@@ -220,6 +263,9 @@ set showmatch
 
 "" [VERY USEFUL] to facilitate pasting from an external application
 set pastetoggle=<F2>
+
+"" always keep the cursor centered
+set scrolloff=999
 
 "" set the color of the line numbers
 highlight LineNr ctermfg=grey
@@ -230,6 +276,11 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
+"" for faster line navigation
+if v:version >= 703
+    set relativenumber
+endif
 
 "***************************************************************************
 "" Functions
@@ -255,9 +306,8 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-"" Always center the cursor after Pg-Down or Pg-Up
-nnoremap <C-f> <C-f>zz
-nnoremap <C-b> <C-b>zz
+" allow the . to execute once for each line of a visual selection
+vnoremap . :normal .<CR>
 
 "" Exit from insert mode
 inoremap <esc> <nop>
@@ -270,11 +320,7 @@ noremap <Left> <nop>
 noremap <Right> <nop>
 
 "" Toggle the cheatsheet window
-nnoremap h :execute "vsplit" "$HOME/.vim/vim_cheatsheet.txt"<cr>
-
-"" Always maintain the cursor at the center of the screen
-nnoremap j jzz
-nnoremap k kzz
+nnoremap h :execute "vsplit" "$HOME/CONFIG/vim_cheatsheet.txt"<cr>
 
 "" List search occurences
 nnoremap l :g//p<cr>
@@ -308,4 +354,4 @@ inoremap ' ''<Esc>i
 inoremap " ""<Esc>i
 
 "" map // to grep (Ag) -> vs. /
-nnoremap // :Ag!<Space>
+nnoremap // :Ack!<Space>
