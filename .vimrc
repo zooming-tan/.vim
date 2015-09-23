@@ -54,6 +54,9 @@ Plugin 'MattesGroeger/vim-bookmarks'
 "" personal diary
 Plugin 'vimwiki/vimwiki'
 
+"" syntax checker
+Plugin 'scrooloose/syntastic'
+
 "" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -90,7 +93,8 @@ let g:pymode_doc_key = 'K'
 
 "" Linting:
 let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
+let g:pymode_lint_unmodified = 1
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
 let g:pymode_lint_write = 1
 let g:pymode_lint_cwindow = 1
 let g:pymode_lint_jump = 0
@@ -194,6 +198,22 @@ noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gd :Gvdiff<CR>
 
 "" and many more..
+
+"***************************************************************************"
+"" syntastic
+"***************************************************************************
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol='✗'
+let g:syntastic_style_warning_symbol='⚠'
+let g:syntastic_auto_loc_list=1
+let g:syntastic_aggregate_errors=1
+
+"" disable syntax checking for python (handled by python-mode)
+let g:syntastic_mode_map = { 'mode': 'active',
+    \ 'active_filetypes': [],
+    \ 'passive_filetypes': ['html', 'python'] }
 
 "***************************************************************************
 "" Basic Setup

@@ -12,6 +12,7 @@ TODO
 <<<<< vim list >>>>>
 <<<<< setqflist() , cexpr>>>>>
 <<<<< fugitive-git is crap >>>>>
+<<<<< vim broken paste, copy to/paste from clipboard? >>>>>
 
 <C-c> : cancel partial command
 daw   : delete the word under the cursor
