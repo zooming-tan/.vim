@@ -1,5 +1,6 @@
-"*************************************************************************** "" Vundle
-"***************************************************************************"
+"****************************
+"" Vundle
+"****************************
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -61,15 +62,19 @@ Plugin 'scrooloose/syntastic'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-"***************************************************************************
+"****************************
 "" Powerline
-"***************************************************************************
+"****************************
+" Use 256 colours (Use this setting only if your terminal supports 256
+" colours)
+set t_Co=256
+
 let g:Powerline_symbols = "fancy"
 set laststatus=2
 
-"***************************************************************************
+"****************************
 "" Python-mode
-"***************************************************************************
+"****************************
 "" Keys:
 "" K           Show python docs
 "" <Leader>r   Run python script
@@ -121,9 +126,9 @@ let g:pymode_folding = 0
 "" Autoremove unused whitespaces
 let g:pymode_utils_whitespaces = 1
 
-"***************************************************************************"
+"****************************
 "" You Complete Me
-"***************************************************************************"
+"****************************
 "" enables auto closing of the preview window when the user accepts the
 "" offered completion string
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -136,17 +141,17 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-"***************************************************************************"
+"****************************
 "" UltiSnips
-"***************************************************************************"
+"****************************
 "" better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-"***************************************************************************"
+"****************************
 "" Ctrl-P
-"***************************************************************************"
+"****************************
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
@@ -166,17 +171,17 @@ let g:ctrlp_user_command = {
 "" speed up
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
-"***************************************************************************
+"****************************
 "" ack (alternative for grep)
-"***************************************************************************"
+"****************************
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor " override to use ag over grep
   let g:ackprg = 'ag'
 endif
 
-"***************************************************************************
+"****************************
 "" fugitive
-"***************************************************************************
+"****************************
 " operate on individual buffer
 
 "" git log
@@ -199,9 +204,9 @@ noremap <Leader>gd :Gvdiff<CR>
 
 "" and many more..
 
-"***************************************************************************"
+"****************************
 "" syntastic
-"***************************************************************************
+"****************************
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
@@ -215,9 +220,9 @@ let g:syntastic_mode_map = { 'mode': 'active',
     \ 'active_filetypes': [],
     \ 'passive_filetypes': ['html', 'python'] }
 
-"***************************************************************************
+"****************************
 "" Basic Setup
-"***************************************************************************"
+"****************************
 "" Encoding
 "set encoding=utf-8
 "set fileencoding=utf-8
@@ -265,9 +270,9 @@ set fileformats=unix,dos,mac
 set showcmd
 set shell=/bin/sh
 
-"***************************************************************************
+"****************************
 "" Visual Settings
-"***************************************************************************
+"****************************
 syntax on
 set ruler
 set number
@@ -278,8 +283,22 @@ colorscheme monokai
 "" visual autocomplete for command menu
 set wildmenu
 
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+" Always use vertical diffs
+set diffopt+=vertical
+
 "" highlight matching [{()}]
 set showmatch
+
+" Display extra whitespace
+set list listchars=tab:»·,trail:·,nbsp:·
+
+" Automatically wrap at 72 characters and spell check git commit messages
+autocmd FileType gitcommit setlocal textwidth=72
+autocmd FileType gitcommit setlocal spell
 
 "" [VERY USEFUL] to facilitate pasting from an external application
 set pastetoggle=<F2>
@@ -302,13 +321,9 @@ if v:version >= 703
     set relativenumber
 endif
 
-"***************************************************************************
-"" Functions
-"***************************************************************************
-
-"***************************************************************************
+"****************************
 "" Autocmd Rules
-"***************************************************************************
+"****************************
 "" Enable filetypes
 filetype on
 filetype plugin on
@@ -317,14 +332,17 @@ filetype indent on
 "" Automatically remove trailing whitespaces
 autocmd FileType vim,text,python,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
-"***************************************************************************
+"****************************
 "" Mappings
-"***************************************************************************
+"****************************
 "" Easier window navigation
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
+
+" Alternate between the last two files
+nnoremap <leader><leader> <c-^>
 
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
@@ -375,3 +393,4 @@ inoremap " ""<Esc>i
 
 "" map // to grep (Ag) -> vs. /
 nnoremap // :Ack!<Space>
+

@@ -27,6 +27,8 @@ F2    : paste mode to preserve source formatting
 :b 5  : switch to buffer no. 5
 :h :r! , :h :vnew, :h :bar(| separator) e.g. :tabnew | r !echo XXXX
 :echo &XXX: display the value of Vim variable
+<Leader><Leader>: alternate between last two opened buffers
+Vp : select line and paste what was yanked (helpful!)
 
 tip: do something, then visual-select block and press . to repeat the command on each line
 
