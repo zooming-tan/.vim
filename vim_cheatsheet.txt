@@ -29,6 +29,10 @@ F2    : paste mode to preserve source formatting
 :echo &XXX: display the value of Vim variable
 <Leader><Leader>: alternate between last two opened buffers
 Vp : select line and paste what was yanked (helpful!)
+if has('XXX') : XXX is a feature, e.g. vim --version, +python
+5cc : delete line(s) and enter Insert mode
+<Leader>p: paste from the clipboard
+
 
 tip: do something, then visual-select block and press . to repeat the command on each line
 

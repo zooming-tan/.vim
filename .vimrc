@@ -294,14 +294,12 @@ set diffopt+=vertical
 set showmatch
 
 " Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
+set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:•
+set list
 
 " Automatically wrap at 72 characters and spell check git commit messages
 autocmd FileType gitcommit setlocal textwidth=72
 autocmd FileType gitcommit setlocal spell
-
-"" [VERY USEFUL] to facilitate pasting from an external application
-set pastetoggle=<F2>
 
 "" always keep the cursor centered
 set scrolloff=999
@@ -309,16 +307,16 @@ set scrolloff=999
 "" set the color of the line numbers
 highlight LineNr ctermfg=grey
 
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
+"" highlight trailing spaces
+highlight SpecialKey ctermbg=darkgrey ctermfg=red
 
 "" for faster line navigation
 if v:version >= 703
     set relativenumber
+endif
+
+if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus
 endif
 
 "****************************

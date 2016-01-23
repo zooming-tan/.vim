@@ -1,0 +1,20 @@
+[gui]
+[gui]
+	recentrepo = /home/oz/Documents/repo
+[user]
+	email = zooming.tan@gmail.com
+	name = zu.ming.tan\n
+[push]
+	default = simple
+[core]
+	editor = vim
+[diff]
+    tool = kdiff3
+[merge]
+    tool = kdiff3
+[mergetool "kdiff3"]
+    path = /usr/bin/kdiff3
+    keepBackup = false
+    trustExitCode = false
+[alias]
+	unstage = reset --
